@@ -15,7 +15,11 @@ but WITHOUT ANY WARRANTY.
 
 #include "Renderer.h"
 
+#include "Object.h"
+
 Renderer *g_Renderer = NULL;
+
+Object object;
 
 void RenderScene(void)
 {
@@ -24,7 +28,9 @@ void RenderScene(void)
 
 	// Renderer Test
 	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
-
+	// object draw test
+	object.DrawObject();
+	
 	glutSwapBuffers();
 }
 
@@ -73,6 +79,10 @@ int main(int argc, char **argv)
 	{
 		std::cout << "Renderer could not be initialized.. \n";
 	}
+
+	//렌더러 포인터 설정
+	object.SetRender(g_Renderer);
+
 
 	glutDisplayFunc(RenderScene);
 	glutIdleFunc(Idle);
