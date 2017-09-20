@@ -15,15 +15,19 @@ public:
 	COLORS() { r = 1; g = 0; b = 0; a = 1; }
 	COLORS(float r, float g, float b, float a) : r(r), g(g), b(b), a(a) {}
 };
+
 class Object
 {
 private:
-	POS			pos;    // 생성위치
-	COLORS		color; // 색상
-	float		size; // 사이즈 
-	int			state;  // 추후 사용 될 상태
-
-	Renderer*	renderer; // 렌더러 포인터
+	POS			pos;		// 생성위치
+	COLORS		color;		// 색상
+	float		size;		// 사이즈 
+	int			state;		// 추후 사용 될 상태
+	
+	float		speed;		// 이동속도
+	float		weight;		// 무게
+	
+	Renderer*	renderer;	// 렌더러 포인터
 
 public:
 	Object();
@@ -37,11 +41,16 @@ public:
 	void	SetColor(COLORS color);
 	void	SetState(int state);
 	void	SetRender(Renderer* pRenderer);
+	void	SetSpeed(float inputSpeed);
+	void	SetWeight(float inputWeight);
+	void	AddSpeed(float addSpeed);
 
-	COLORS	NormalizationColor(COLORS color);
+	COLORS	NormalizationColor(COLORS color); // 0~255의 값을 0~1로 정규화
 	
 	int		GetState() { return state; }
 	float	GetSize() { return size; }
+	float	GetSpeed() { return speed; }
+	float   GetWeight() { return weight; }
 	POS		GetPos() { return pos; }
 	COLORS	GetColor() { return color; }
 

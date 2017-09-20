@@ -4,6 +4,7 @@
 
 Object::Object()
 {
+	//test init;
 	pos = { 10,10,0 };
 	size = 10;
 	color = { 1,0,0,1 };
@@ -48,9 +49,24 @@ void Object::SetState(int state)
 	this->state = state;
 }
 
-void Object::SetRender(Renderer * pRenderer)
+void Object::SetRender(Renderer* pRenderer)
 {
 	renderer = pRenderer;
+}
+
+void Object::SetSpeed(float inputSpeed)
+{
+	speed = inputSpeed;
+}
+
+void Object::SetWeight(float inputWeight)
+{
+	weight = inputWeight;
+}
+
+void Object::AddSpeed(float addSpeed)
+{
+	speed += addSpeed;
 }
 
 COLORS Object::NormalizationColor(COLORS color)
