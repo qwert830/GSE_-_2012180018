@@ -7,6 +7,8 @@ public :
 	float x, y, z;
 	POS() {}
 	POS(float x, float y, float z) : x(x),y(y),z(z) {}
+	POS operator *(int a) { x*a, y*a, z*a; return POS(x,y,z); }
+	POS& operator +=(POS temp) { x += temp.x; y += temp.y; z += temp.z; return POS(x, y, z); }
 };
 
 struct COLORS {
@@ -20,6 +22,7 @@ class Object
 {
 private:
 	POS			pos;		// 생성위치
+	POS			direction;  // 이동방향
 	COLORS		color;		// 색상
 	float		size;		// 사이즈 
 	int			state;		// 추후 사용 될 상태
@@ -55,5 +58,6 @@ public:
 	COLORS	GetColor() { return color; }
 
 	void	DrawObject();
+	void	MoveUpdate();
 };
 

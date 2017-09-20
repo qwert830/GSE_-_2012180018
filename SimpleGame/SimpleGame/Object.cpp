@@ -82,3 +82,9 @@ void Object::DrawObject()
 {
 	renderer->DrawSolidRect(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a);
 }
+
+
+void Object::MoveUpdate()
+{
+	pos.operator += (direction*speed);
+}

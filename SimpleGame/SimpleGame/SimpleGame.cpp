@@ -28,9 +28,24 @@ void RenderScene(void)
 
 	// Renderer Test
 	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
+	
 	// object draw test
+	object.SetPos(POS(-10, -10, 0));
+	object.SetColor(0, 1, 0, 1);
 	object.DrawObject();
 	
+	object.SetPos(POS(10, -10, 0));
+	object.SetColor(0, 0, 1, 1);
+	object.DrawObject();
+
+	object.SetPos(POS(10, 10, 0));
+	object.SetColor(1, 0, 0, 1);
+	object.DrawObject();
+
+	object.SetPos(POS(-10, 10, 0));
+	object.SetColor(1, 1, 1, 1);
+	object.DrawObject();
+
 	glutSwapBuffers();
 }
 
