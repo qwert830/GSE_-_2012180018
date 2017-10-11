@@ -36,6 +36,7 @@ private:
 public:
 	Object();
 	Object(float xpos, float ypos, float zpos, float size) : pos(xpos,ypos,zpos),size(size) {}
+	Object(Renderer* gRenderer, POS position, COLORS colors);
 	~Object();
 
 	void	SetPos(float x, float y, float z);

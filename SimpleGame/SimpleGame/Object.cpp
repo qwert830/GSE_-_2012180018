@@ -9,6 +9,13 @@ Object::Object()
 	speed = 1;
 }
 
+Object::Object(Renderer * gRenderer, POS position, COLORS colors)
+{
+	SetRender(gRenderer);
+	SetPos(position);
+	SetColor(colors);
+}
+
 Object::~Object()
 {
 }

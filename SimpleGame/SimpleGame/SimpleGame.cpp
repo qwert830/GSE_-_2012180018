@@ -13,6 +13,7 @@ but WITHOUT ANY WARRANTY.
 #include "Dependencies\freeglut.h"
 #include "Renderer.h"
 #include "Object.h"
+#include "ObjectManager.h"
 #include <vector>
 
 #define MY_WINDOW_W 500
@@ -21,8 +22,7 @@ but WITHOUT ANY WARRANTY.
 using namespace std;
 
 Renderer *g_Renderer = NULL;
-int num = 0;
-vector<Object*> objectVector;
+ObjectManager manager(MY_WINDOW_W, MY_WINDOW_H);
 
 void RenderScene(void) // update call
 {
@@ -32,33 +32,22 @@ void RenderScene(void) // update call
 	// Renderer Test
 	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
 	
-	for (int i = 0; i < num; i++)
-	{
-		objectVector[i]->DrawObject();
+	manager.update(0);
 
-		objectVector[i]->Update(0);
-	}
 	glutSwapBuffers();
 }
 
 void Idle(void) // update call
 {
-	for (int i = 0; i < num; i++)
-	{
-		objectVector[i]->DrawObject();
+	manager.update(0);
 
-		objectVector[i]->Update(0);
-	}
 	RenderScene();
 }
 
 void MouseInput(int button, int state, int x, int y)
 {
-	objectVector.push_back(new Object());
-	objectVector[num]->SetRender(g_Renderer);
-	objectVector[num]->SetPos(x-MY_WINDOW_W/2, -y+MY_WINDOW_H/2, 0);
-	objectVector[num++]->SetColor(1, 0, 0, 1);
-	printf("%d,%d", x, y);
+	manager.newObject(g_Renderer, x, y, COLORS(1, 0, 0, 1));
+
 	RenderScene();
 }
 
@@ -100,10 +89,6 @@ int main(int argc, char **argv)
 	}
 
 	//렌더러 포인터 설정
-
-	objectVector.push_back(new Object());
-	objectVector[num]->SetRender(g_Renderer);
-	num++;
 
 	glutDisplayFunc(RenderScene);
 	glutIdleFunc(Idle);
