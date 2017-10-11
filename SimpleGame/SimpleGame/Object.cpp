@@ -4,10 +4,9 @@
 
 Object::Object()
 {
-	//test init;
-	pos = { 10,10,0 };
-	size = 10;
-	color = { 1,0,0,1 };
+	size = 20;
+	direction = POS(0, 1, 0);
+	speed = 1;
 }
 
 Object::~Object()
@@ -84,7 +83,13 @@ void Object::DrawObject()
 }
 
 
-void Object::MoveUpdate()
+void Object::MoveUpdate(float time)
 {
-	pos.operator += (direction*speed);
+	pos += (direction*speed);
+}
+
+void Object::Update(float time)
+{
+	MoveUpdate(time);
+
 }
