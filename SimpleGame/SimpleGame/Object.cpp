@@ -5,7 +5,7 @@
 Object::Object()
 {
 	size = 20;
-	direction = POS(0, 1, 0);
+	SetDirection(POS(0, 1, 0));
 	speed = 1;
 }
 
@@ -15,6 +15,8 @@ Object::Object(Renderer * gRenderer, POS position, COLORS colors, float size)
 	SetPos(position);
 	SetColor(colors);
 	SetSize(size);
+	SetSpeed(0);
+	SetDirection(POS(0, 0, 0));
 }
 
 Object::~Object()

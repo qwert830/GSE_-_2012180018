@@ -12,7 +12,6 @@ void ObjectManager::Update(float time)
 
 void ObjectManager::NewObject(Renderer* g_Renderer,int x, int y, COLORS colors, float size)
 {
-	printf("newObject");
 	manager.push_back(new Object(g_Renderer, POS(x - windowW, -y + windowH, 0), colors, size));
 }
 

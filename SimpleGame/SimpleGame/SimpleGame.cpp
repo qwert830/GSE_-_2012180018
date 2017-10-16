@@ -47,8 +47,10 @@ void MouseInput(int button, int state, int x, int y)
 	// state == 0 : buttonDown
 	// state == 1 : buttonUp
 	if (state == 1)
+	{
+		printf("buttonUp\n");
 		manager.NewObject(g_Renderer, x, y, COLORS(1, 0, 0, 1), 5);
-
+	}
 	RenderScene();
 }
 
