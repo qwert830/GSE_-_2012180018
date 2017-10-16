@@ -36,7 +36,7 @@ private:
 public:
 	Object();
 	Object(float xpos, float ypos, float zpos, float size) : pos(xpos,ypos,zpos),size(size) {}
-	Object(Renderer* gRenderer, POS position, COLORS colors);
+	Object(Renderer* gRenderer, POS position, COLORS colors, float size);
 	~Object();
 
 	void	SetPos(float x, float y, float z);
@@ -46,6 +46,7 @@ public:
 	void	SetColor(COLORS color);
 	void	SetState(int state);
 	void	SetRender(Renderer* pRenderer);
+	void	SetDirection(POS direction);
 	void	SetSpeed(float inputSpeed);
 	void	SetWeight(float inputWeight);
 	void	AddSpeed(float addSpeed);

@@ -12,8 +12,9 @@ private:
 	int windowW;
 	int windowH;
 public:
-	void update(float time);
-	void newObject(Renderer* g_Renderer, int x, int y, COLORS colors);
+	void Update(float time);
+	void NewObject(Renderer* g_Renderer, int x, int y, COLORS colors,float size);
+	void Draw();
 	ObjectManager();
 	ObjectManager(int x, int y) : windowW(x / 2), windowH(y / 2) {}
 	~ObjectManager();

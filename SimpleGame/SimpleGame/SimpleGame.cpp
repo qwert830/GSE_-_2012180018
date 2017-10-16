@@ -29,24 +29,25 @@ void RenderScene(void) // update call
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 
-	// Renderer Test
-	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
-	
-	manager.update(0);
+	manager.Update(0);
+	manager.Draw();
 
 	glutSwapBuffers();
 }
 
 void Idle(void) // update call
 {
-	manager.update(0);
+	manager.Update(0);
 
 	RenderScene();
 }
 
 void MouseInput(int button, int state, int x, int y)
 {
-	manager.newObject(g_Renderer, x, y, COLORS(1, 0, 0, 1));
+	// state == 0 : buttonDown
+	// state == 1 : buttonUp
+	if (state == 1)
+		manager.NewObject(g_Renderer, x, y, COLORS(1, 0, 0, 1), 5);
 
 	RenderScene();
 }
@@ -67,7 +68,7 @@ int main(int argc, char **argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(0, 0);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(MY_WINDOW_W, MY_WINDOW_H);
 	glutCreateWindow("Game Software Engineering KPU");
 
 	glewInit();

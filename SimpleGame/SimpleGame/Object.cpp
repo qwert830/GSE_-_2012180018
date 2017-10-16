@@ -9,11 +9,12 @@ Object::Object()
 	speed = 1;
 }
 
-Object::Object(Renderer * gRenderer, POS position, COLORS colors)
+Object::Object(Renderer * gRenderer, POS position, COLORS colors, float size)
 {
 	SetRender(gRenderer);
 	SetPos(position);
 	SetColor(colors);
+	SetSize(size);
 }
 
 Object::~Object()
@@ -58,6 +59,11 @@ void Object::SetState(int state)
 void Object::SetRender(Renderer* pRenderer)
 {
 	renderer = pRenderer;
+}
+
+void Object::SetDirection(POS direction)
+{
+	this->direction = direction;
 }
 
 void Object::SetSpeed(float inputSpeed)
