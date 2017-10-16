@@ -3,4 +3,7 @@
 *.obj
 *.log
 *.exe
+*.log
+*.opendb
+*.ilk
 .vs/
