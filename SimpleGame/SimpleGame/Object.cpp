@@ -4,9 +4,7 @@
 
 Object::Object()
 {
-	size = 20;
-	SetDirection(POS(0, 1, 0));
-	speed = 1;
+
 }
 
 Object::Object(Renderer * gRenderer, POS position, COLORS colors, float size)
@@ -15,8 +13,6 @@ Object::Object(Renderer * gRenderer, POS position, COLORS colors, float size)
 	SetPos(position);
 	SetColor(colors);
 	SetSize(size);
-	SetSpeed(0);
-	SetDirection(POS(0, 0, 0));
 }
 
 Object::~Object()
@@ -65,6 +61,9 @@ void Object::SetRender(Renderer* pRenderer)
 
 void Object::SetDirection(POS direction)
 {
+	float length = fabs(direction.x) + fabs(direction.y);
+	direction.x = direction.x / length;
+	direction.y = direction.y / length;
 	this->direction = direction;
 }
 

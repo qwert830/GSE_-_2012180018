@@ -13,7 +13,7 @@ but WITHOUT ANY WARRANTY.
 #include "Dependencies\freeglut.h"
 #include "Renderer.h"
 #include "Object.h"
-#include "ObjectManager.h"
+#include "SceneManager.h"
 #include <vector>
 
 #define MY_WINDOW_W 500
@@ -22,7 +22,9 @@ but WITHOUT ANY WARRANTY.
 using namespace std;
 
 Renderer *g_Renderer = NULL;
-ObjectManager manager(MY_WINDOW_W, MY_WINDOW_H);
+SceneManager manager(MY_WINDOW_W, MY_WINDOW_H);
+
+bool buttonClick = false;
 
 void RenderScene(void) // update call
 {
@@ -42,14 +44,20 @@ void Idle(void) // update call
 	RenderScene();
 }
 
+// 구현 : 클릭 & 드래그
+
 void MouseInput(int button, int state, int x, int y)
 {
 	// state == 0 : buttonDown
 	// state == 1 : buttonUp
-	if (state == 1)
+	if (button == GLUT_LEFT_BUTTON&&state == GLUT_DOWN)
 	{
-		printf("buttonUp\n");
-		manager.NewObject(g_Renderer, x, y, COLORS(1, 0, 0, 1), 5);
+		buttonClick = true;
+	}
+	if (button == GLUT_LEFT_BUTTON&&state == GLUT_UP&&buttonClick)
+	{
+		manager.NewObject(x, y, COLORS(1, 0, 0, 1), 5);
+		buttonClick = false;
 	}
 	RenderScene();
 }
@@ -85,12 +93,14 @@ int main(int argc, char **argv)
 	
 	// Initialize Renderer
 	g_Renderer = new Renderer(MY_WINDOW_W, MY_WINDOW_H);
-
+	
 	if (!g_Renderer->IsInitialized())
 	{
 		std::cout << "Renderer could not be initialized.. \n";
 	}
 
+	manager.SetRenderer(g_Renderer);
+	manager.CreateTest();
 	//렌더러 포인터 설정
 
 	glutDisplayFunc(RenderScene);
