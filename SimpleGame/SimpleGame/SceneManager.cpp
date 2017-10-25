@@ -7,9 +7,9 @@ void SceneManager::Update(float time)
 {
 	CollisionRect();
 	CollisionObject();
-	for (auto &d : manager)
+	for(auto&d : manager)
 	{
-		d->Update(0);
+		d->Update(time);
 	}
 }
 
@@ -29,13 +29,13 @@ void SceneManager::Draw()
 void SceneManager::CreateTest()
 {
 	srand(time(NULL));
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		float x = (float)(rand() % 5) - 0.99f;
 		float y = (float)(rand() % 5) - 0.99f;
-		NewObject(rand() % windowW * 2, rand() % windowH * 2, COLORS(1, 1, 1, 1), 20);
+		NewObject(rand() % windowW * 2, rand() % windowH * 2, COLORS(1, 1, 1, 1), 10);
 		manager[i]->SetDirection(POS(x,y,0));
-		manager[i]->SetSpeed(1);
+		manager[i]->SetSpeed(1.0f);
 	}
 }
 

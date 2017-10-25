@@ -8,6 +8,7 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY.
 */
 #include "stdafx.h"
+#include <Windows.h>
 #include <iostream>
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
@@ -25,21 +26,25 @@ SceneManager manager(MY_WINDOW_W, MY_WINDOW_H);
 
 bool buttonClick = false;
 
+DWORD preTime = 0;
+DWORD curTime = 0;
+DWORD elapsedTime = 0;
+
 void RenderScene(void) // update call
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
-
-	manager.Update(0);
+	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);	
+	
+	manager.Update(elapsedTime);
 	manager.Draw();
+	preTime = curTime;
 
 	glutSwapBuffers();
 }
 
 void Idle(void) // update call
 {
-	manager.Update(0);
-
+	manager.Update(elapsedTime);
 	RenderScene();
 }
 

@@ -31,6 +31,9 @@ private:
 	float		speed;		// 이동속도
 	float		weight;		// 무게
 	
+	float		life;		// 생명력
+	float		lifeTime;	// 생명유지시간
+
 	Renderer*	renderer;	// 렌더러 포인터
 
 public:
@@ -53,13 +56,15 @@ public:
 
 	COLORS	NormalizationColor(COLORS color); // 0~255의 값을 0~1로 정규화
 	
-	int		GetState() { return state; }
-	float	GetSize() { return size; }
-	float	GetSpeed() { return speed; }
-	float   GetWeight() { return weight; }
-	POS		GetPos() { return pos; }
-	COLORS	GetColor() { return color; }
-	POS		GetDirection() { return direction; }
+	int		GetState()		{ return state; }
+	float	GetSize()		{ return size; }
+	float	GetSpeed()		{ return speed; }
+	float   GetWeight()		{ return weight; }
+	float   GetLife()		{ return life; }
+	float	GetLifeTime()	{ return lifeTime; }
+	POS		GetPos()		{ return pos; }
+	COLORS	GetColor()		{ return color; }
+	POS		GetDirection()	{ return direction; }
 
 	void	DrawObject();
 	void	MoveUpdate(float time);

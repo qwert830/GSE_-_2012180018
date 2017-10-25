@@ -105,5 +105,4 @@ void Object::MoveUpdate(float time)
 void Object::Update(float time)
 {
 	MoveUpdate(time);
-
 }
