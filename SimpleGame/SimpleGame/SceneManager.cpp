@@ -29,14 +29,11 @@ void SceneManager::Draw()
 void SceneManager::CreateTest()
 {
 	srand(time(NULL));
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		float x = (float)(rand() % 5) - 0.99f;
 		float y = (float)(rand() % 5) - 0.99f;
-		if (i == 0)
-			NewObject(rand() % windowW * 2, rand() % windowH * 2, COLORS(1, 1, 1, 1), 5);
-		else
-			NewObject(rand() % windowW * 2, rand() % windowH * 2, COLORS(0, 0, 1, 1), 5);
+		NewObject(rand() % windowW * 2, rand() % windowH * 2, COLORS(1, 1, 1, 1), 20);
 		manager[i]->SetDirection(POS(x,y,0));
 		manager[i]->SetSpeed(1);
 	}
@@ -64,38 +61,47 @@ void SceneManager::CollisionRect()
 
 void SceneManager::CollisionObject()
 {
+	for (int i = 0; i < manager.size(); i++)
+		manager[i]->SetColor(1, 1, 1, 1);
+
 	if(manager.size() >= 2)
 	for (int i = 0; i < manager.size(); i++)
 	{
 		POS tempObj1 = manager[i]->GetPos();
-		float tempSize1 = manager[i]->GetSize();
-		manager[i]->SetColor(0, 1, 1, 1);
+		float tempSize1 = manager[i]->GetSize()/2;
 
-		for (int j = 1; j < manager.size(); j++)
+		for (int j = i+1; j < manager.size(); j++)
 		{
 			POS tempObj2 = manager[j]->GetPos();
-			float tempSize2 = manager[j]->GetSize();
+			float tempSize2 = manager[j]->GetSize()/2;
 
-			if (tempObj1.y - tempSize1 <= tempObj2.y + tempSize2 && tempObj1.y - tempSize1 >= tempObj2.y - tempSize2)
+			if (tempObj1.x - tempSize1 <= tempObj2.x - tempSize2 && tempObj2.x - tempSize2 <= tempObj1.x + tempSize1)
 			{
-				if (tempObj1.x - tempSize1 <= tempObj2.x + tempSize2 && tempObj1.x - tempSize1 >= tempObj2.x - tempSize2)
+				if (tempObj1.y - tempSize1 <= tempObj2.y - tempSize2 && tempObj2.y - tempSize2 <= tempObj1.y + tempSize1)
 				{
 					manager[i]->SetColor(1, 0, 0, 1);
+					manager[j]->SetColor(1, 0, 0, 1);
 					break;
 				}
-				else if (tempObj1.x + tempSize1 <= tempObj2.x + tempSize2 && tempObj1.x + tempSize1 >= tempObj2.x - tempSize2)
+				else if (tempObj1.y - tempSize1 <= tempObj2.y + tempSize2 && tempObj2.y + tempSize2 <= tempObj1.y + tempSize1)
 				{
+					manager[i]->SetColor(1, 0, 0, 1);
+					manager[j]->SetColor(1, 0, 0, 1);
 					break;
 				}
 			}
-			else if (tempObj1.y + tempSize1 <= tempObj2.y + tempSize2 && tempObj1.y + tempSize1 >= tempObj2.y - tempSize2)
+			else if (tempObj1.x - tempSize1 <= tempObj2.x + tempSize2 && tempObj2.x + tempSize2 <= tempObj1.x + tempSize1)
 			{
-				if (tempObj1.x - tempSize1 <= tempObj2.x + tempSize2 && tempObj1.x - tempSize1 >= tempObj2.x - tempSize2)
+				if (tempObj1.y - tempSize1 <= tempObj2.y - tempSize2 && tempObj2.y - tempSize2 <= tempObj1.y + tempSize1)
 				{
+					manager[i]->SetColor(1, 0, 0, 1);
+					manager[j]->SetColor(1, 0, 0, 1);
 					break;
 				}
-				else if (tempObj1.x + tempSize1 <= tempObj2.x + tempSize2 && tempObj1.x + tempSize1 >= tempObj2.x - tempSize2)
+				else if (tempObj1.y - tempSize1 <= tempObj2.y + tempSize2 && tempObj2.y + tempSize2 <= tempObj1.y + tempSize1)
 				{
+					manager[i]->SetColor(1, 0, 0, 1);
+					manager[j]->SetColor(1, 0, 0, 1);
 					break;
 				}
 			}

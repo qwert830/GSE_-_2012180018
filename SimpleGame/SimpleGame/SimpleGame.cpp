@@ -21,7 +21,6 @@ but WITHOUT ANY WARRANTY.
 
 using namespace std;
 
-Renderer *g_Renderer = NULL;
 SceneManager manager(MY_WINDOW_W, MY_WINDOW_H);
 
 bool buttonClick = false;
@@ -91,15 +90,7 @@ int main(int argc, char **argv)
 		std::cout << "GLEW 3.0 not supported\n ";
 	}
 	
-	// Initialize Renderer
-	g_Renderer = new Renderer(MY_WINDOW_W, MY_WINDOW_H);
-	
-	if (!g_Renderer->IsInitialized())
-	{
-		std::cout << "Renderer could not be initialized.. \n";
-	}
-
-	manager.SetRenderer(g_Renderer);
+	manager.CreateRenderer();
 	manager.CreateTest();
 	//렌더러 포인터 설정
 
@@ -110,8 +101,6 @@ int main(int argc, char **argv)
 	glutSpecialFunc(SpecialKeyInput);
 
 	glutMainLoop();
-
-	delete g_Renderer;
 
     return 0;
 }

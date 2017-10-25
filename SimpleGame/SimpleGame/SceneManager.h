@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "Renderer.h"
 #include <vector>
 #include <iostream>
 
@@ -16,12 +17,12 @@ public:
 	void Update(float time);
 	void NewObject(int x, int y, COLORS colors,float size);
 	void Draw(); 
-	void SetRenderer(Renderer* g_Renderer) { pRenderer = g_Renderer; }
+	void CreateRenderer() { pRenderer = new Renderer(windowW * 2, windowH * 2); }
 	void CreateTest();
 	void CollisionRect();
 	void CollisionObject();
 	SceneManager();
-	SceneManager(int x, int y) : windowW(x / 2), windowH(y / 2){}
+	SceneManager(int x, int y) : windowW(x / 2), windowH(y / 2) {}
 	~SceneManager();
 };
 
