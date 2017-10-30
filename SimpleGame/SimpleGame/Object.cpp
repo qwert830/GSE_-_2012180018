@@ -13,6 +13,18 @@ Object::Object(Renderer * gRenderer, POS position, COLORS colors, float size)
 	SetPos(position);
 	SetColor(colors);
 	SetSize(size);
+	SetLifeTime(5);
+}
+
+Object::Object(Renderer * gRenderer, POS position, POS direction, COLORS colors, float size)
+{
+	SetRender(gRenderer);
+	SetPos(position);
+	SetColor(colors);
+	SetSize(size);
+	SetDirection(direction);
+	SetLifeTime(5);
+	SetSpeed(rand()%100 + 50);
 }
 
 Object::~Object()
@@ -62,8 +74,8 @@ void Object::SetRender(Renderer* pRenderer)
 void Object::SetDirection(POS direction)
 {
 	float length = fabs(direction.x) + fabs(direction.y);
-	direction.x = direction.x / length;
-	direction.y = direction.y / length;
+	direction.x = (float)direction.x / length;
+	direction.y = (float)direction.y / length;
 	this->direction = direction;
 }
 
@@ -75,6 +87,16 @@ void Object::SetSpeed(float inputSpeed)
 void Object::SetWeight(float inputWeight)
 {
 	weight = inputWeight;
+}
+
+void Object::SetLife(float life)
+{
+	this->life = life;
+}
+
+void Object::SetLifeTime(float time)
+{
+	lifeTime = time;
 }
 
 void Object::AddSpeed(float addSpeed)
@@ -99,10 +121,11 @@ void Object::DrawObject()
 
 void Object::MoveUpdate(float time)
 {
-	pos += (direction*speed);
+	pos += direction*speed*time;
 }
 
 void Object::Update(float time)
 {
+	lifeTime -= time;
 	MoveUpdate(time);
 }

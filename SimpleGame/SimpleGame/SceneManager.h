@@ -9,13 +9,14 @@ using namespace std;
 class SceneManager
 {
 private:
-	vector<Object*> manager;
 	int windowW;
 	int windowH;
 	Renderer* pRenderer;
 public:
+	vector<Object*> manager;
 	void Update(float time);
 	void NewObject(int x, int y, COLORS colors,float size);
+	void NewObject(int x, int y, COLORS colors, POS direction, float size);
 	void Draw(); 
 	void CreateRenderer() { pRenderer = new Renderer(windowW * 2, windowH * 2); }
 	void CreateTest();

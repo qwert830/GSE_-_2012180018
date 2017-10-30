@@ -7,8 +7,8 @@ public :
 	float x, y, z;
 	POS() {}
 	POS(float x, float y, float z) : x(x),y(y),z(z) {}
-	POS operator *(int a) { x *= a, y *= a, z *= a; return POS(x,y,z); }
-	POS& operator +=(POS temp) { x += temp.x; y += temp.y; z += temp.z; return POS(x, y, z); }
+	POS operator *(float a) {return POS(x*a,y*a,z*a); }
+	POS& operator +=(POS temp) { x += (float)temp.x; y += (float)temp.y; z += (float)temp.z; return POS(x, y, z); }
 	POS operator =(POS temp) { x = temp.x; y = temp.y; z = temp.z; return POS(x, y, z); }
 };
 
@@ -40,6 +40,7 @@ public:
 	Object();
 	Object(float xpos, float ypos, float zpos, float size) : pos(xpos,ypos,zpos),size(size) {}
 	Object(Renderer* gRenderer, POS position, COLORS colors, float size);
+	Object(Renderer * gRenderer, POS position, POS direction, COLORS colors, float size);
 	~Object();
 
 	void	SetPos(float x, float y, float z);
@@ -52,6 +53,8 @@ public:
 	void	SetDirection(POS direction);
 	void	SetSpeed(float inputSpeed);
 	void	SetWeight(float inputWeight);
+	void	SetLife(float life);
+	void	SetLifeTime(float time);
 	void	AddSpeed(float addSpeed);
 
 	COLORS	NormalizationColor(COLORS color); // 0~255의 값을 0~1로 정규화

@@ -1,21 +1,36 @@
 #include "stdafx.h"
 #include "SceneManager.h"
-#include <time.h>
 #include <random>
 
 void SceneManager::Update(float time)
 {
+	
 	CollisionRect();
 	CollisionObject();
-	for(auto&d : manager)
+
+	int i = 0;
+	for( i = 0; i< manager.size(); i++)
 	{
-		d->Update(time);
+		manager[i]->Update(time);
+	}
+	for (i = 0; i< manager.size(); i++)
+	{
+		if (manager[i]->GetLifeTime() <= 0)
+		{
+			manager.erase(manager.begin() + i);
+			i--;
+		}
 	}
 }
 
 void SceneManager::NewObject(int x, int y, COLORS colors, float size)
 {
 	manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), colors, size));
+}
+
+void SceneManager::NewObject(int x, int y, COLORS colors, POS direction, float size)
+{
+	manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), direction, colors, size));
 }
 
 void SceneManager::Draw()
@@ -28,14 +43,11 @@ void SceneManager::Draw()
 
 void SceneManager::CreateTest()
 {
-	srand(time(NULL));
 	for (int i = 0; i < 100; i++)
 	{
 		float x = (float)(rand() % 5) - 0.99f;
 		float y = (float)(rand() % 5) - 0.99f;
-		NewObject(rand() % windowW * 2, rand() % windowH * 2, COLORS(1, 1, 1, 1), 10);
-		manager[i]->SetDirection(POS(x,y,0));
-		manager[i]->SetSpeed(1.0f);
+		NewObject(rand() % windowW * 2, rand() % windowH * 2, COLORS(1, 1, 1, 1),POS(x,y,0), 10);
 	}
 }
 
