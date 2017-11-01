@@ -63,6 +63,9 @@ public:
 	void	SetLifeTime(float time);
 	void	SetAttackDelay(float time);
 	void	AddSpeed(float addSpeed);
+	void	SetLSSD(float life, float speed, int state, POS direction);
+
+
 
 	COLORS	NormalizationColor(COLORS color); // 0~255의 값을 0~1로 정규화
 	

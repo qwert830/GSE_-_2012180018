@@ -74,6 +74,11 @@ void Object::SetRender(Renderer* pRenderer)
 void Object::SetDirection(POS direction)
 {
 	float length = fabs(direction.x) + fabs(direction.y);
+	if (length == 0)
+	{
+		this->direction = { 0,0,0 };
+		return;
+	}
 	direction.x = (float)direction.x / length;
 	direction.y = (float)direction.y / length;
 	this->direction = direction;
@@ -107,6 +112,14 @@ void Object::SetAttackDelay(float time)
 void Object::AddSpeed(float addSpeed)
 {
 	speed += addSpeed;
+}
+
+void Object::SetLSSD(float life, float speed, int state, POS direction)
+{
+	this->life = life;
+	this->speed = speed;
+	this->state = state;
+	SetDirection(direction);
 }
 
 COLORS Object::NormalizationColor(COLORS color)

@@ -24,8 +24,6 @@ public:
 	void NewBullet(int x, int y);
 	void Draw(); 
 	void CreateRenderer() { pRenderer = new Renderer(windowW * 2, windowH * 2); }
-	void CreateTest();
-	void CollisionRect();
 	void CollisionObject();
 	float GetRandom();
 	SceneManager();
