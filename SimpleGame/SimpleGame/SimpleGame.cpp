@@ -39,7 +39,6 @@ void RenderScene(void) // update call
 	curTime = timeGetTime();
 	elapsedTime = (float)(curTime - preTime)/1000.0f;
 	manager.Update(elapsedTime);
-	//시간값 정상
 	manager.Draw();
 	preTime = curTime;
 
@@ -63,12 +62,7 @@ void MouseInput(int button, int state, int x, int y)
 	}
 	if (button == GLUT_LEFT_BUTTON&&state == GLUT_UP&&buttonClick)
 	{
-		for (int i = 0; i < 100; i++)
-		{
-			float dx = (float)(rand() % 10) - 4.99f;
-			float dy = (float)(rand() % 10) - 4.99f;
-			manager.NewObject(x, y, COLORS(1, 1, 1, 1), POS(dx, dy, 0), 10);
-		}
+		manager.NewCharacter(x, y);
 		buttonClick = false;
 	}
 	RenderScene();
@@ -105,8 +99,7 @@ int main(int argc, char **argv)
 	srand(time(NULL));
 
 	manager.CreateRenderer();
-	manager.CreateTest();
-	
+	manager.NewBuilding(250, 250);
 	preTime = timeGetTime();
 
 	glutDisplayFunc(RenderScene);

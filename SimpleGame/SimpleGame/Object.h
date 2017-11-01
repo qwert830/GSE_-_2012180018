@@ -1,5 +1,10 @@
 #pragma once
 
+#define OBJECT_BUILDING 10
+#define OBJECT_CHARACTER 11
+#define OBJECT_BULLET 12
+#define OBJECT_ARROW 13
+
 class Renderer;
 
 struct POS {
@@ -22,20 +27,21 @@ public:
 class Object
 {
 private:
-	POS			pos;		// 생성위치
-	POS			direction;  // 이동방향
-	COLORS		color;		// 색상
-	float		size;		// 사이즈 
-	int			state;		// 상태
+	POS			pos;			// 생성위치
+	POS			direction;		// 이동방향
+	COLORS		color;			// 색상
+	float		size;			// 사이즈 
+	int			state;			// 상태 0 : 빌딩 1 
 	
-	float		speed;		// 이동속도
-	float		weight;		// 무게
+	float		speed;			// 이동속도
+	float		weight;			// 무게
 	
-	float		life;		// 생명력
-	float		lifeTime;	// 생명유지시간
+	float		life;			// 생명력
+	float		lifeTime;		// 생명유지시간
 
-	Renderer*	renderer;	// 렌더러 포인터
+	float		attackDelay = 0;// 공격딜레이
 
+	Renderer*	renderer;		// 렌더러 포인터
 public:
 	Object();
 	Object(float xpos, float ypos, float zpos, float size) : pos(xpos,ypos,zpos),size(size) {}
@@ -55,19 +61,21 @@ public:
 	void	SetWeight(float inputWeight);
 	void	SetLife(float life);
 	void	SetLifeTime(float time);
+	void	SetAttackDelay(float time);
 	void	AddSpeed(float addSpeed);
 
 	COLORS	NormalizationColor(COLORS color); // 0~255의 값을 0~1로 정규화
 	
-	int		GetState()		{ return state; }
-	float	GetSize()		{ return size; }
-	float	GetSpeed()		{ return speed; }
-	float   GetWeight()		{ return weight; }
-	float   GetLife()		{ return life; }
-	float	GetLifeTime()	{ return lifeTime; }
-	POS		GetPos()		{ return pos; }
-	COLORS	GetColor()		{ return color; }
-	POS		GetDirection()	{ return direction; }
+	int		GetState()			{ return state; }
+	float	GetSize()			{ return size; }
+	float	GetSpeed()			{ return speed; }
+	float   GetWeight()			{ return weight; }
+	float   GetLife()			{ return life; }
+	float	GetLifeTime()		{ return lifeTime; }
+	float	GetAttackDelay()	{ return attackDelay; }
+	POS		GetPos()			{ return pos; }
+	COLORS	GetColor()			{ return color; }
+	POS		GetDirection()		{ return direction; }
 
 	void	DrawObject();
 	void	MoveUpdate(float time);

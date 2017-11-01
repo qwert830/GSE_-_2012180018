@@ -99,6 +99,11 @@ void Object::SetLifeTime(float time)
 	lifeTime = time;
 }
 
+void Object::SetAttackDelay(float time)
+{
+	attackDelay = time;
+}
+
 void Object::AddSpeed(float addSpeed)
 {
 	speed += addSpeed;
@@ -126,6 +131,11 @@ void Object::MoveUpdate(float time)
 
 void Object::Update(float time)
 {
-	lifeTime -= time;
+	if (state != OBJECT_BUILDING)
+		lifeTime -= time;
+	if (state == OBJECT_BUILDING)
+	{
+		attackDelay += time;
+	}
 	MoveUpdate(time);
 }
