@@ -30,7 +30,7 @@ void SceneManager::Update(float time)
 			manager[i]->Update(time);
 			if (manager[i]->GetState() == OBJECT_BUILDING)
 			{
-				if (manager[i]->GetAttackDelay() >= 1.0f)
+				if (manager[i]->GetAttackDelay() >= 0.5f)
 				{
 					POS temp = manager[i]->GetPos();
 					NewBullet(temp.x + windowW, temp.y + windowH);
