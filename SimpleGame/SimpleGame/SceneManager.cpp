@@ -5,7 +5,7 @@
 void SceneManager::Update(float time)
 {
 	CollisionObject();
-	for (int i = 0; i< manager.size(); i++)
+	for (int i = 0; i< manager.size();i++)
 	{
 		if (manager[i]->GetLifeTime() <= 0 && manager[i]->GetState() == 0)
 		{
@@ -26,14 +26,17 @@ void SceneManager::Update(float time)
 				manager[i]->SetAttackDelay(0);
 			}
 		}
+		if (i >= manager.size())
+		{
+			break;
+		}
 	}
 	timecount += time;
-	cout << timecount << endl;
 	if (timecount >= fps)
 	{
 		for (int i = 0; i < manager.size(); i++)
 		{
-			manager[i]->Update(time);
+			manager[i]->Update(timecount);
 		}
 		timecount = 0;
 	}
@@ -82,14 +85,14 @@ void SceneManager::Draw()
 	}
 }
 
-void SceneManager::CollisionObject()
+inline void SceneManager::CollisionObject()
 {
 	for (int i = 0; i < manager.size(); i++)
 		if (manager[i]->GetState() == OBJECT_CHARACTER)
 			manager[i]->SetColor(1, 1, 1, 1);
-
-	if(manager.size() >= 2)
-	for (int i = 0; i < manager.size(); i++)
+	
+	if(manager.size() > 1)
+	for (int i = 0; i < manager.size(); )
 	{
 		POS tempObj1 = manager[i]->GetPos();
 		float tempSize1 = manager[i]->GetSize()/2.0f;
@@ -106,94 +109,105 @@ void SceneManager::CollisionObject()
 			manager[i]->SetDirection(POS(temp.x, -temp.y, 0));
 			manager[i]->MoveUpdate(1.0f / 60.0f);
 		}
-
-		for (int j = i+1; j < manager.size(); j++)
+		for (int j = 0; j < manager.size();)
 		{
 			POS tempObj2 = manager[j]->GetPos();
 			float tempSize2 = manager[j]->GetSize()/2.0f;
 
-			if (tempObj1.x - tempSize1 <= tempObj2.x - tempSize2 && tempObj2.x - tempSize2 <= tempObj1.x + tempSize1)
-			{
-				if (tempObj1.y - tempSize1 <= tempObj2.y - tempSize2 && tempObj2.y - tempSize2 <= tempObj1.y + tempSize1)
+			if(i != j)
+				if (tempObj1.x - tempSize1 <= tempObj2.x - tempSize2 && tempObj2.x - tempSize2 <= tempObj1.x + tempSize1)
 				{
-					if (manager[i]->GetState() == OBJECT_CHARACTER)
-						manager[i]->SetColor(1, 0, 0, 1);
-					if (manager[j]->GetState() == OBJECT_CHARACTER)
-						manager[j]->SetColor(1, 0, 0, 1);
-					if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+					if (tempObj1.y - tempSize1 <= tempObj2.y - tempSize2 && tempObj2.y - tempSize2 <= tempObj1.y + tempSize1)
 					{
-						manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-						manager.erase(manager.begin() + j);
-						j--;
+						if (manager[i]->GetState() == OBJECT_CHARACTER)
+							manager[i]->SetColor(1, 0, 0, 1);
+						if (manager[j]->GetState() == OBJECT_CHARACTER)
+							manager[j]->SetColor(1, 0, 0, 1);
+						if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
+						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
 					}
-					else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+					else if (tempObj1.y - tempSize1 <= tempObj2.y + tempSize2 && tempObj2.y + tempSize2 <= tempObj1.y + tempSize1)
 					{
-						manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-						manager.erase(manager.begin() + j);
-						j--;
+						if (manager[i]->GetState() == OBJECT_CHARACTER)
+							manager[i]->SetColor(1, 0, 0, 1);
+						if (manager[j]->GetState() == OBJECT_CHARACTER)
+							manager[j]->SetColor(1, 0, 0, 1);
+						if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
+						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
 					}
 				}
-				else if (tempObj1.y - tempSize1 <= tempObj2.y + tempSize2 && tempObj2.y + tempSize2 <= tempObj1.y + tempSize1)
+				else if (tempObj1.x - tempSize1 <= tempObj2.x + tempSize2 && tempObj2.x + tempSize2 <= tempObj1.x + tempSize1)
 				{
-					if (manager[i]->GetState() == OBJECT_CHARACTER)
-						manager[i]->SetColor(1, 0, 0, 1);
-					if (manager[j]->GetState() == OBJECT_CHARACTER)
-						manager[j]->SetColor(1, 0, 0, 1);
-					if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+					if (tempObj1.y - tempSize1 <= tempObj2.y - tempSize2 && tempObj2.y - tempSize2 <= tempObj1.y + tempSize1)
 					{
-						manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-						manager.erase(manager.begin() + j);
-						j--;
+						if (manager[i]->GetState() == OBJECT_CHARACTER)
+							manager[i]->SetColor(1, 0, 0, 1);
+						if (manager[j]->GetState() == OBJECT_CHARACTER)
+							manager[j]->SetColor(1, 0, 0, 1);
+						if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
+						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
 					}
-					else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+					else if (tempObj1.y - tempSize1 <= tempObj2.y + tempSize2 && tempObj2.y + tempSize2 <= tempObj1.y + tempSize1)
 					{
-						manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-						manager.erase(manager.begin() + j);
-						j--;
+						if (manager[i]->GetState() == OBJECT_CHARACTER)
+							manager[i]->SetColor(1, 0, 0, 1);
+						if (manager[j]->GetState() == OBJECT_CHARACTER)
+							manager[j]->SetColor(1, 0, 0, 1);
+						if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
+						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
 					}
 				}
-			}
-			else if (tempObj1.x - tempSize1 <= tempObj2.x + tempSize2 && tempObj2.x + tempSize2 <= tempObj1.x + tempSize1)
-			{
-				if (tempObj1.y - tempSize1 <= tempObj2.y - tempSize2 && tempObj2.y - tempSize2 <= tempObj1.y + tempSize1)
-				{
-					if (manager[i]->GetState() == OBJECT_CHARACTER)
-						manager[i]->SetColor(1, 0, 0, 1);
-					if (manager[j]->GetState() == OBJECT_CHARACTER)
-						manager[j]->SetColor(1, 0, 0, 1);
-					if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
-					{
-						manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-						manager.erase(manager.begin() + j);
-						j--;
-					}
-					else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
-					{
-						manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-						manager.erase(manager.begin() + j);
-						j--;
-					}
-				}
-				else if (tempObj1.y - tempSize1 <= tempObj2.y + tempSize2 && tempObj2.y + tempSize2 <= tempObj1.y + tempSize1)
-				{
-					if (manager[i]->GetState() == OBJECT_CHARACTER)
-						manager[i]->SetColor(1, 0, 0, 1);
-					if (manager[j]->GetState() == OBJECT_CHARACTER)
-						manager[j]->SetColor(1, 0, 0, 1);
-					if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
-					{
-						manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-						manager.erase(manager.begin() + j);
-						j--;
-					}
-					else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
-					{
-						manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-						manager.erase(manager.begin() + j);
-						j--;
-					}
-				}
-			}
+			j++;
+			if (j >= manager.size() || i >= manager.size())
+				break;
+		}
+
+		i++;
+		if (i >= manager.size())
+			break;
+		if (manager.size() < 2)
+		{
+			break;
 		}
 	}
 }
