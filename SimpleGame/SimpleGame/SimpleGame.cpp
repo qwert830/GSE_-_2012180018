@@ -99,6 +99,7 @@ int main(int argc, char **argv)
 	srand(time(NULL));
 
 	manager.CreateRenderer();
+	manager.Init();
 	manager.NewBuilding(250, 250);
 	preTime = timeGetTime();
 

@@ -131,9 +131,12 @@ COLORS Object::NormalizationColor(COLORS color)
 	return color;
 }
 
-void Object::DrawObject()
+void Object::DrawObject(int texturesNum)
 {
-	renderer->DrawSolidRect(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a);
+	if (texturesNum == 0)
+		renderer->DrawSolidRect(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a);
+	else
+		renderer->DrawTexturedRect(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a, texturesNum);
 }
 
 
@@ -146,7 +149,7 @@ void Object::Update(float time)
 {
 	if (state != OBJECT_BUILDING)
 		lifeTime -= time;
-	if (state == OBJECT_BUILDING)
+	if (state == OBJECT_BUILDING || state == OBJECT_CHARACTER)
 	{
 		attackDelay += time;
 	}

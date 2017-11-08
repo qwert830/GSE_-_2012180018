@@ -40,7 +40,7 @@ private:
 	float		lifeTime;		// 생명유지시간
 
 	float		attackDelay = 0;// 공격딜레이
-
+	int			id;
 	Renderer*	renderer;		// 렌더러 포인터
 public:
 	Object();
@@ -64,12 +64,13 @@ public:
 	void	SetAttackDelay(float time);
 	void	AddSpeed(float addSpeed);
 	void	SetLSSD(float life, float speed, int state, POS direction);
-
+	void	SetID(int num) { id = num; }
 
 
 	COLORS	NormalizationColor(COLORS color); // 0~255의 값을 0~1로 정규화
 	
 	int		GetState()			{ return state; }
+	int		GetID()				{ return id; }
 	float	GetSize()			{ return size; }
 	float	GetSpeed()			{ return speed; }
 	float   GetWeight()			{ return weight; }
@@ -80,7 +81,7 @@ public:
 	COLORS	GetColor()			{ return color; }
 	POS		GetDirection()		{ return direction; }
 
-	void	DrawObject();
+	void	DrawObject(int texturesNum);
 	void	MoveUpdate(float time);
 	void	Update(float time);
 };

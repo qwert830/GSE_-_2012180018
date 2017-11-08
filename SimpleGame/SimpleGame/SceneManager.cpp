@@ -2,6 +2,11 @@
 #include "SceneManager.h"
 #include <random>
 
+void SceneManager::Init()
+{
+	buildingTextures = pRenderer->CreatePngTexture("./Textures/Test.png");
+}
+
 void SceneManager::Update(float time)
 {
 	CollisionObject();
@@ -15,14 +20,23 @@ void SceneManager::Update(float time)
 		else if (manager[i]->GetLife() <= 0)
 		{
 			manager.erase(manager.begin() + i);
-			i--;
+			break;
 		}
 		if (manager[i]->GetState() == OBJECT_BUILDING)
 		{
 			if (manager[i]->GetAttackDelay() >= 0.5f)
 			{
 				POS temp = manager[i]->GetPos();
-				NewBullet(temp.x + windowW, temp.y + windowH);
+				NewBullet(temp.x + windowW, -temp.y + windowH);
+				manager[i]->SetAttackDelay(0);
+			}
+		}
+		else if (manager[i]->GetState() == OBJECT_CHARACTER)
+		{
+			if (manager[i]->GetAttackDelay() >= 0.5f)
+			{
+				POS temp = manager[i]->GetPos();
+				NewArrow(temp.x + windowW, -temp.y + windowH, manager[i]->GetID());
 				manager[i]->SetAttackDelay(0);
 			}
 		}
@@ -66,6 +80,8 @@ void SceneManager::NewCharacter(int x, int y)
 	float dx = GetRandom();
 	float dy = GetRandom();
 	manager[index]->SetLSSD(10, 100, OBJECT_CHARACTER, POS(dx, dy, 0));
+	manager[index]->SetID(characterID);
+	characterID++;
 }
 
 void SceneManager::NewBullet(int x, int y)
@@ -77,11 +93,27 @@ void SceneManager::NewBullet(int x, int y)
 	manager[index]->SetLSSD(20, 300, OBJECT_BULLET, POS(dx, dy, 0));
 }
 
+void SceneManager::NewArrow(int x, int y, int id)
+{
+	manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(0, 1, 0, 1), 2));
+	int index = manager.size() - 1;
+	float dx = GetRandom();
+	float dy = GetRandom();
+	manager[index]->SetLSSD(10, 100, OBJECT_ARROW, POS(dx, dy, 0));
+	manager[index]->SetID(id);
+}
+
 void SceneManager::Draw()
 {
 	for (auto &d : manager)
 	{
-		d->DrawObject();
+		switch (d->GetState())
+		{
+		case OBJECT_BUILDING: d->DrawObject(buildingTextures); break;
+		case OBJECT_CHARACTER: d->DrawObject(0); break;
+		case OBJECT_BULLET:d->DrawObject(0); break;
+		case OBJECT_ARROW:d->DrawObject(0); break;
+		}
 	}
 }
 
@@ -123,13 +155,20 @@ inline void SceneManager::CollisionObject()
 							manager[i]->SetColor(1, 0, 0, 1);
 						if (manager[j]->GetState() == OBJECT_CHARACTER)
 							manager[j]->SetColor(1, 0, 0, 1);
-						if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+						if (manager[i]->GetState() == OBJECT_BUILDING && (manager[j]->GetState() == OBJECT_CHARACTER || manager[j]->GetState() == OBJECT_ARROW))
 						{
 							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
 							manager.erase(manager.begin() + j);
 							j--;
 						}
 						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
+						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_ARROW
+							&& manager[i]->GetID() != manager[j]->GetID())
 						{
 							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
 							manager.erase(manager.begin() + j);
@@ -142,13 +181,20 @@ inline void SceneManager::CollisionObject()
 							manager[i]->SetColor(1, 0, 0, 1);
 						if (manager[j]->GetState() == OBJECT_CHARACTER)
 							manager[j]->SetColor(1, 0, 0, 1);
-						if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+						if (manager[i]->GetState() == OBJECT_BUILDING && (manager[j]->GetState() == OBJECT_CHARACTER || manager[j]->GetState() == OBJECT_ARROW))
 						{
 							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
 							manager.erase(manager.begin() + j);
 							j--;
 						}
 						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
+						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_ARROW
+							&& manager[i]->GetID() != manager[j]->GetID())
 						{
 							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
 							manager.erase(manager.begin() + j);
@@ -164,13 +210,20 @@ inline void SceneManager::CollisionObject()
 							manager[i]->SetColor(1, 0, 0, 1);
 						if (manager[j]->GetState() == OBJECT_CHARACTER)
 							manager[j]->SetColor(1, 0, 0, 1);
-						if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+						if (manager[i]->GetState() == OBJECT_BUILDING && (manager[j]->GetState() == OBJECT_CHARACTER || manager[j]->GetState() == OBJECT_ARROW))
 						{
 							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
 							manager.erase(manager.begin() + j);
 							j--;
 						}
 						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
+						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_ARROW
+							&& manager[i]->GetID() != manager[j]->GetID())
 						{
 							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
 							manager.erase(manager.begin() + j);
@@ -183,13 +236,20 @@ inline void SceneManager::CollisionObject()
 							manager[i]->SetColor(1, 0, 0, 1);
 						if (manager[j]->GetState() == OBJECT_CHARACTER)
 							manager[j]->SetColor(1, 0, 0, 1);
-						if (manager[i]->GetState() == OBJECT_BUILDING && manager[j]->GetState() == OBJECT_CHARACTER)
+						if (manager[i]->GetState() == OBJECT_BUILDING && (manager[j]->GetState() == OBJECT_CHARACTER || manager[j]->GetState() == OBJECT_ARROW))
 						{
 							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
 							manager.erase(manager.begin() + j);
 							j--;
 						}
 						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
+						{
+							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
+							manager.erase(manager.begin() + j);
+							j--;
+						}
+						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_ARROW
+							&& manager[i]->GetID() != manager[j]->GetID())
 						{
 							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
 							manager.erase(manager.begin() + j);
