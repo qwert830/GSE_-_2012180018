@@ -28,7 +28,8 @@ public:
 	void NewArrow(int x, int y, int id);
 	void Draw(); 
 	void CreateRenderer() { pRenderer = new Renderer(windowW * 2, windowH * 2); }
-	inline void CollisionObject();
+	void CollisionObject();
+	int CollisionEffect(int Obj1, int Obj2);
 	float GetRandom();
 	SceneManager();
 	SceneManager(int x, int y) : windowW(x / 2), windowH(y / 2) {}

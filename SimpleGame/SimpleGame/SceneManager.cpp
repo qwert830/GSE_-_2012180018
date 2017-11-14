@@ -117,14 +117,14 @@ void SceneManager::Draw()
 	}
 }
 
-inline void SceneManager::CollisionObject()
+void SceneManager::CollisionObject()
 {
-	for (int i = 0; i < manager.size(); i++)
+	for (int i = 0; i < manager.size(); ++i)
 		if (manager[i]->GetState() == OBJECT_CHARACTER)
 			manager[i]->SetColor(1, 1, 1, 1);
 	
 	if(manager.size() > 1)
-	for (int i = 0; i < manager.size(); )
+	for (int i = 0; i < manager.size(); ++i)
 	{
 		POS tempObj1 = manager[i]->GetPos();
 		float tempSize1 = manager[i]->GetSize()/2.0f;
@@ -141,7 +141,7 @@ inline void SceneManager::CollisionObject()
 			manager[i]->SetDirection(POS(temp.x, -temp.y, 0));
 			manager[i]->MoveUpdate(1.0f / 60.0f);
 		}
-		for (int j = 0; j < manager.size();)
+		for (int j = 0; j < manager.size(); ++j)
 		{
 			POS tempObj2 = manager[j]->GetPos();
 			float tempSize2 = manager[j]->GetSize()/2.0f;
@@ -151,125 +151,62 @@ inline void SceneManager::CollisionObject()
 				{
 					if (tempObj1.y - tempSize1 <= tempObj2.y - tempSize2 && tempObj2.y - tempSize2 <= tempObj1.y + tempSize1)
 					{
-						if (manager[i]->GetState() == OBJECT_CHARACTER)
-							manager[i]->SetColor(1, 0, 0, 1);
-						if (manager[j]->GetState() == OBJECT_CHARACTER)
-							manager[j]->SetColor(1, 0, 0, 1);
-						if (manager[i]->GetState() == OBJECT_BUILDING && (manager[j]->GetState() == OBJECT_CHARACTER || manager[j]->GetState() == OBJECT_ARROW))
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
-						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
-						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_ARROW
-							&& manager[i]->GetID() != manager[j]->GetID())
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
+						j = CollisionEffect(i, j);
 					}
 					else if (tempObj1.y - tempSize1 <= tempObj2.y + tempSize2 && tempObj2.y + tempSize2 <= tempObj1.y + tempSize1)
 					{
-						if (manager[i]->GetState() == OBJECT_CHARACTER)
-							manager[i]->SetColor(1, 0, 0, 1);
-						if (manager[j]->GetState() == OBJECT_CHARACTER)
-							manager[j]->SetColor(1, 0, 0, 1);
-						if (manager[i]->GetState() == OBJECT_BUILDING && (manager[j]->GetState() == OBJECT_CHARACTER || manager[j]->GetState() == OBJECT_ARROW))
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
-						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
-						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_ARROW
-							&& manager[i]->GetID() != manager[j]->GetID())
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
+						j = CollisionEffect(i, j);
 					}
 				}
 				else if (tempObj1.x - tempSize1 <= tempObj2.x + tempSize2 && tempObj2.x + tempSize2 <= tempObj1.x + tempSize1)
 				{
 					if (tempObj1.y - tempSize1 <= tempObj2.y - tempSize2 && tempObj2.y - tempSize2 <= tempObj1.y + tempSize1)
 					{
-						if (manager[i]->GetState() == OBJECT_CHARACTER)
-							manager[i]->SetColor(1, 0, 0, 1);
-						if (manager[j]->GetState() == OBJECT_CHARACTER)
-							manager[j]->SetColor(1, 0, 0, 1);
-						if (manager[i]->GetState() == OBJECT_BUILDING && (manager[j]->GetState() == OBJECT_CHARACTER || manager[j]->GetState() == OBJECT_ARROW))
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
-						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
-						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_ARROW
-							&& manager[i]->GetID() != manager[j]->GetID())
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
+						j = CollisionEffect(i, j);
 					}
 					else if (tempObj1.y - tempSize1 <= tempObj2.y + tempSize2 && tempObj2.y + tempSize2 <= tempObj1.y + tempSize1)
 					{
-						if (manager[i]->GetState() == OBJECT_CHARACTER)
-							manager[i]->SetColor(1, 0, 0, 1);
-						if (manager[j]->GetState() == OBJECT_CHARACTER)
-							manager[j]->SetColor(1, 0, 0, 1);
-						if (manager[i]->GetState() == OBJECT_BUILDING && (manager[j]->GetState() == OBJECT_CHARACTER || manager[j]->GetState() == OBJECT_ARROW))
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
-						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_BULLET)
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
-						else if (manager[i]->GetState() == OBJECT_CHARACTER && manager[j]->GetState() == OBJECT_ARROW
-							&& manager[i]->GetID() != manager[j]->GetID())
-						{
-							manager[i]->SetLife(manager[i]->GetLife() - manager[j]->GetLife());
-							manager.erase(manager.begin() + j);
-							j--;
-						}
+						j = CollisionEffect(i, j);
 					}
 				}
-			j++;
 			if (j >= manager.size() || i >= manager.size())
 				break;
 		}
-
-		i++;
-		if (i >= manager.size())
-			break;
 		if (manager.size() < 2)
 		{
 			break;
 		}
 	}
+}
+
+int SceneManager::CollisionEffect(int Obj1, int Obj2)
+{
+	if (manager[Obj1]->GetState() == OBJECT_CHARACTER && manager[Obj2]->GetState() == OBJECT_CHARACTER)
+	{
+		manager[Obj1]->SetColor(1, 0, 0, 1);
+		manager[Obj2]->SetColor(1, 0, 0, 1);
+	}
+	if (manager[Obj1]->GetState() == OBJECT_BUILDING && 
+		(manager[Obj2]->GetState() == OBJECT_CHARACTER || manager[Obj2]->GetState() == OBJECT_ARROW))
+	{
+		manager[Obj1]->SetLife(manager[Obj1]->GetLife() - manager[Obj2]->GetLife());
+		manager.erase(manager.begin() + Obj2);
+		return (Obj2 - 1);
+	}
+	else if (manager[Obj1]->GetState() == OBJECT_CHARACTER && manager[Obj2]->GetState() == OBJECT_BULLET)
+	{
+		manager[Obj1]->SetLife(manager[Obj1]->GetLife() - manager[Obj2]->GetLife());
+		manager.erase(manager.begin() + Obj2);
+		return (Obj2 - 1);
+	}
+	else if (manager[Obj1]->GetState() == OBJECT_CHARACTER && manager[Obj2]->GetState() == OBJECT_ARROW
+		&& manager[Obj1]->GetID() != manager[Obj2]->GetID())
+	{
+		manager[Obj1]->SetLife(manager[Obj1]->GetLife() - manager[Obj2]->GetLife());
+		manager.erase(manager.begin() + Obj2);
+		return (Obj2 - 1);
+	}
+	return (Obj2);
 }
 
 float SceneManager::GetRandom()
