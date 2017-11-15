@@ -15,22 +15,29 @@ private:
 	float timecount = 0.0f;
 	int characterID = 0;
 	Renderer* pRenderer;
-	int buildingTextures = 0;
+
+	float updateTime = 0.0f;
+	float createTime = 5.0f;
+
+	int buildingTextures1 = 0;
+	int buildingTextures2 = 0;
 public:
 	vector<Object*> manager;
 	void Init();
 	void Update(float time);
 	void NewObject(int x, int y, COLORS colors,float size);
 	void NewObject(int x, int y, COLORS colors, POS direction, float size);
-	void NewBuilding(int x, int y);
-	void NewCharacter(int x, int y);
-	void NewBullet(int x, int y);
-	void NewArrow(int x, int y, int id);
+	void NewBuilding(int x, int y, Team team);
+	void NewCharacter(int x, int y, Team team);
+	void NewBullet(int x, int y, Team team);
+	void NewArrow(int x, int y, int id, Team team);
 	void Draw(); 
 	void CreateRenderer() { pRenderer = new Renderer(windowW * 2, windowH * 2); }
 	void CollisionObject();
+	void CreateCharacter(int x, int y);
 	int CollisionEffect(int Obj1, int Obj2);
 	float GetRandom();
+	float RangeRandom(int a, int b);
 	SceneManager();
 	SceneManager(int x, int y) : windowW(x / 2), windowH(y / 2) {}
 	~SceneManager();

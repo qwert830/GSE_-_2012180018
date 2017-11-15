@@ -19,7 +19,7 @@ but WITHOUT ANY WARRANTY.
 #include <time.h>
 
 #define MY_WINDOW_W 500
-#define MY_WINDOW_H 500
+#define MY_WINDOW_H 800
 
 using namespace std;
 
@@ -54,15 +54,13 @@ void Idle(void) // update call
 
 void MouseInput(int button, int state, int x, int y)
 {
-	// state == 0 : buttonDown
-	// state == 1 : buttonUp
 	if (button == GLUT_LEFT_BUTTON&&state == GLUT_DOWN)
 	{
 		buttonClick = true;
 	}
 	if (button == GLUT_LEFT_BUTTON&&state == GLUT_UP&&buttonClick)
 	{
-		manager.NewCharacter(x, y);
+		manager.CreateCharacter(x, y);
 		buttonClick = false;
 	}
 	RenderScene();
@@ -70,6 +68,14 @@ void MouseInput(int button, int state, int x, int y)
 
 void KeyInput(unsigned char key, int x, int y)
 {
+	if (key == 'a' || key == 'A')
+	{
+		cout << "---------------------" << endl;
+		cout << "---------------------" << endl;
+		cout << manager.manager.size() << endl;
+		cout << "---------------------" << endl;
+		cout << "---------------------" << endl;
+	}
 	RenderScene();
 }
 
@@ -100,7 +106,7 @@ int main(int argc, char **argv)
 
 	manager.CreateRenderer();
 	manager.Init();
-	manager.NewBuilding(250, 250);
+
 	preTime = timeGetTime();
 
 	glutDisplayFunc(RenderScene);

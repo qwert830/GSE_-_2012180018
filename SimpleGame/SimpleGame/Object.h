@@ -7,6 +7,10 @@
 
 class Renderer;
 
+enum Team {
+	Team_1 = 10,Team_2
+};
+
 struct POS {
 public :
 	float x, y, z;
@@ -41,6 +45,9 @@ private:
 
 	float		attackDelay = 0;// 공격딜레이
 	int			id;
+
+	Team		team;			// 팀종류
+
 	Renderer*	renderer;		// 렌더러 포인터
 public:
 	Object();
@@ -65,12 +72,13 @@ public:
 	void	AddSpeed(float addSpeed);
 	void	SetLSSD(float life, float speed, int state, POS direction);
 	void	SetID(int num) { id = num; }
-
+	void	SetTeam(Team teamType) { team = teamType; }
 
 	COLORS	NormalizationColor(COLORS color); // 0~255의 값을 0~1로 정규화
 	
 	int		GetState()			{ return state; }
 	int		GetID()				{ return id; }
+	Team	GetTeam()			{ return team; }
 	float	GetSize()			{ return size; }
 	float	GetSpeed()			{ return speed; }
 	float   GetWeight()			{ return weight; }
