@@ -5,6 +5,12 @@
 #define OBJECT_BULLET 12
 #define OBJECT_ARROW 13
 
+#define LEVEL_GOD 0
+#define LEVEL_SKY 0.1
+#define LEVEL_GROUND 0.2
+#define LEVEL_UNDERGROUND 0.3
+
+
 class Renderer;
 
 enum Team {
@@ -46,6 +52,8 @@ private:
 	float		attackDelay = 0;// 공격딜레이
 	int			id;
 
+	float		renderLevel;	// 렌더링 순위
+
 	Team		team;			// 팀종류
 
 	Renderer*	renderer;		// 렌더러 포인터
@@ -73,7 +81,7 @@ public:
 	void	SetLSSD(float life, float speed, int state, POS direction);
 	void	SetID(int num) { id = num; }
 	void	SetTeam(Team teamType) { team = teamType; }
-
+	void	SetLevel(float level) { renderLevel = level; }
 	COLORS	NormalizationColor(COLORS color); // 0~255의 값을 0~1로 정규화
 	
 	int		GetState()			{ return state; }
@@ -85,11 +93,13 @@ public:
 	float   GetLife()			{ return life; }
 	float	GetLifeTime()		{ return lifeTime; }
 	float	GetAttackDelay()	{ return attackDelay; }
+	float	GetLevel()			{ return renderLevel; }
 	POS		GetPos()			{ return pos; }
 	COLORS	GetColor()			{ return color; }
 	POS		GetDirection()		{ return direction; }
 
 	void	DrawObject(int texturesNum);
+	void	DrawGauge();
 	void	MoveUpdate(float time);
 	void	Update(float time);
 };

@@ -68,14 +68,6 @@ void MouseInput(int button, int state, int x, int y)
 
 void KeyInput(unsigned char key, int x, int y)
 {
-	if (key == 'a' || key == 'A')
-	{
-		cout << "---------------------" << endl;
-		cout << "---------------------" << endl;
-		cout << manager.manager.size() << endl;
-		cout << "---------------------" << endl;
-		cout << "---------------------" << endl;
-	}
 	RenderScene();
 }
 

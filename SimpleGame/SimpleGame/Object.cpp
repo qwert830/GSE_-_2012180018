@@ -133,10 +133,42 @@ COLORS Object::NormalizationColor(COLORS color)
 
 void Object::DrawObject(int texturesNum)
 {
-	if (texturesNum == 0)
-		renderer->DrawSolidRect(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a);
+	if (texturesNum == 0) 
+	{
+		renderer->DrawSolidRect(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a,renderLevel);
+		DrawGauge();
+	}
 	else
-		renderer->DrawTexturedRect(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a, texturesNum);
+	{
+		renderer->DrawTexturedRect(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a, texturesNum, renderLevel);
+		DrawGauge();
+	}
+}
+
+void Object::DrawGauge()
+{
+	if (state == OBJECT_BUILDING)
+	{
+		if (team == Team::Team_1)
+		{
+			renderer->DrawSolidRectGauge(pos.x, pos.y + size/2 + 10, pos.z, size, 10, 1, 0, 0, 1, (float)(life / BUILDING_HP), 0);
+		}
+		else if (team == Team::Team_2)
+		{
+			renderer->DrawSolidRectGauge(pos.x, pos.y + size/2 + 10, pos.z, size, 10, 0, 0, 1, 1, (float)(life / BUILDING_HP), 0);
+		}
+	}
+	else if (state == OBJECT_CHARACTER)
+	{
+		if (team == Team::Team_1)
+		{
+			renderer->DrawSolidRectGauge(pos.x, pos.y + size/2 + 10, pos.z, size, 10, 1, 0, 0, 1, (float)(life / CHARACTER_HP), 0);
+		}
+		else if (team == Team::Team_2)
+		{
+			renderer->DrawSolidRectGauge(pos.x, pos.y + size/2 + 10, pos.z, size, 10, 0, 0, 1, 1, (float)(life / CHARACTER_HP), 0);
+		}
+	}
 }
 
 

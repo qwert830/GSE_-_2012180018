@@ -86,54 +86,58 @@ void SceneManager::NewObject(int x, int y, COLORS colors, POS direction, float s
 void SceneManager::NewBuilding(int x, int y, Team team)
 {
 	if (team == Team::Team_1)
-		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(1, 0, 0, 1), 100));
+		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(1, 0, 0, 1), BUILDING_SIZE));
 	else if (team == Team::Team_2)
-		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(1, 0, 0, 1), 100));
+		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(0, 0, 1, 1), BUILDING_SIZE));
 	int index = manager.size() - 1;
-	manager[index]->SetLSSD(500, 0, OBJECT_BUILDING, POS(0, 0, 0));
+	manager[index]->SetLSSD(BUILDING_HP, BUILDING_SPEED, OBJECT_BUILDING, POS(0, 0, 0));
 	manager[index]->SetTeam(team);
+	manager[index]->SetLevel(LEVEL_SKY);
 }
 
 void SceneManager::NewCharacter(int x, int y, Team team)
 {
 	if (team == Team::Team_1)
-		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(1, 0, 0, 1), 10));
+		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(1, 0, 0, 1), CHARACTER_SIZE));
 	else if (team == Team::Team_2)
-		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(0, 0, 1, 1), 10));
+		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(0, 0, 1, 1), CHARACTER_SIZE));
 	int index = manager.size() - 1;
 	float dx = GetRandom();
 	float dy = GetRandom();
-	manager[index]->SetLSSD(10, 300, OBJECT_CHARACTER, POS(dx, dy, 0));
+	manager[index]->SetLSSD(CHARACTER_HP, CHARACTER_SPEED, OBJECT_CHARACTER, POS(dx, dy, 0));
 	manager[index]->SetID(characterID);
 	manager[index]->SetTeam(team);
+	manager[index]->SetLevel(LEVEL_GROUND);
 	characterID++;
 }
 
 void SceneManager::NewBullet(int x, int y, Team team)
 {
 	if (team == Team::Team_1)
-		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(1, 0, 0, 1), 2));
+		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(1, 0, 0, 1), BULLET_SIZE));
 	else if(team == Team::Team_2)
-		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(0, 0, 1, 1), 2));
+		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(0, 0, 1, 1), BULLET_SIZE));
 	int index = manager.size() - 1;
 	float dx = GetRandom();
 	float dy = GetRandom();
-	manager[index]->SetLSSD(20, 600, OBJECT_BULLET, POS(dx, dy, 0));
+	manager[index]->SetLSSD(BULLET_HP, BULLET_SPEED, OBJECT_BULLET, POS(dx, dy, 0));
 	manager[index]->SetTeam(team);
+	manager[index]->SetLevel(LEVEL_UNDERGROUND);
 }
 
 void SceneManager::NewArrow(int x, int y, int id, Team team)
 {
 	if (team == Team::Team_1)
-		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(0.5, 0.2, 0.7, 1), 2));
+		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(0.5, 0.2, 0.7, 1), ARROW_SIZE));
 	else if (team == Team::Team_2)
-		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(1, 1, 0, 1), 2));
+		manager.push_back(new Object(pRenderer, POS(x - windowW, -y + windowH, 0), COLORS(1, 1, 0, 1), ARROW_SIZE));
 	int index = manager.size() - 1;
 	float dx = GetRandom();
 	float dy = GetRandom();
-	manager[index]->SetLSSD(10, 100, OBJECT_ARROW, POS(dx, dy, 0));
+	manager[index]->SetLSSD(ARROW_HP, ARROW_SPEED, OBJECT_ARROW, POS(dx, dy, 0));
 	manager[index]->SetID(id);
 	manager[index]->SetTeam(team);
+	manager[index]->SetLevel(LEVEL_UNDERGROUND);
 }
 
 void SceneManager::Draw()
@@ -163,15 +167,31 @@ void SceneManager::CollisionObject()
 
 		if (tempObj1.x <-windowW || tempObj1.x > windowW)
 		{
-			POS temp = manager[i]->GetDirection();
-			manager[i]->SetDirection(POS(-temp.x, temp.y, 0));
-			manager[i]->MoveUpdate(1.0f/60.0f);
+			if (manager[i]->GetState() == OBJECT_BULLET || manager[i]->GetState() == OBJECT_ARROW)
+			{
+				manager.erase(manager.begin() + i);
+				i--;
+			}
+			else
+			{
+				POS temp = manager[i]->GetDirection();
+				manager[i]->SetDirection(POS(-temp.x, temp.y, 0));
+				manager[i]->MoveUpdate(1.0f / 60.0f);
+			}
 		}
 		if (tempObj1.y < -windowH || tempObj1.y > windowH)
 		{
-			POS temp = manager[i]->GetDirection();
-			manager[i]->SetDirection(POS(temp.x, -temp.y, 0));
-			manager[i]->MoveUpdate(1.0f / 60.0f);
+			if (manager[i]->GetState() == OBJECT_BULLET || manager[i]->GetState() == OBJECT_ARROW)
+			{
+				manager.erase(manager.begin() + i);
+				i--;
+			}
+			else
+			{
+				POS temp = manager[i]->GetDirection();
+				manager[i]->SetDirection(POS(temp.x, -temp.y, 0));
+				manager[i]->MoveUpdate(1.0f / 60.0f);
+			}
 		}
 		for (int j = 0; j < manager.size(); ++j)
 		{
