@@ -131,12 +131,22 @@ COLORS Object::NormalizationColor(COLORS color)
 	return color;
 }
 
-void Object::DrawObject(int texturesNum)
+void Object::DrawObject(int texturesNum, float time)
 {
 	if (texturesNum == 0) 
 	{
 		renderer->DrawSolidRect(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a,renderLevel);
 		DrawGauge();
+	}
+	else if (state == OBJECT_CHARACTER)
+	{
+		renderer->DrawTexturedRectSeq(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a, texturesNum, aniCount, 0, CHARACTER_ANIMATION_COUNT, 1, renderLevel);
+		DrawGauge();
+	}
+	else if (state == OBJECT_BULLET)
+	{
+		renderer->DrawParticle(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a, -direction.x, -direction.y, texturesNum, particleTime);
+		particleTime += time;
 	}
 	else
 	{
@@ -181,8 +191,15 @@ void Object::Update(float time)
 {
 	if (state != OBJECT_BUILDING)
 		lifeTime -= time;
-	if (state == OBJECT_BUILDING || state == OBJECT_CHARACTER)
+	if (state == OBJECT_BUILDING)
 	{
+		attackDelay += time;
+	}
+	if (state == OBJECT_CHARACTER)
+	{
+		aniCount++;
+		if (aniCount >= CHARACTER_ANIMATION_COUNT)
+			aniCount = 0;
 		attackDelay += time;
 	}
 	MoveUpdate(time);

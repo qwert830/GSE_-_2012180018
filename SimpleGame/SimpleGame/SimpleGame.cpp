@@ -39,7 +39,7 @@ void RenderScene(void) // update call
 	curTime = timeGetTime();
 	elapsedTime = (float)(curTime - preTime)/1000.0f;
 	manager.Update(elapsedTime);
-	manager.Draw();
+	manager.Draw(elapsedTime);
 	preTime = curTime;
 
 	glutSwapBuffers();

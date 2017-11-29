@@ -21,6 +21,11 @@ private:
 
 	int buildingTextures1 = 0;
 	int buildingTextures2 = 0;
+	int backgroundTextures = 0;
+	int characterTextures1 = 0;
+	int characterTextures2 = 0;
+	int bulletTextures1 = 0;
+	int bulletTextures2 = 0;
 public:
 	vector<Object*> manager;
 	void Init();
@@ -31,7 +36,7 @@ public:
 	void NewCharacter(int x, int y, Team team);
 	void NewBullet(int x, int y, Team team);
 	void NewArrow(int x, int y, int id, Team team);
-	void Draw(); 
+	void Draw(float time); 
 	void CreateRenderer() { pRenderer = new Renderer(windowW * 2, windowH * 2); }
 	void CollisionObject();
 	void CreateCharacter(int x, int y);

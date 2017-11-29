@@ -9,6 +9,7 @@
 #define LEVEL_SKY 0.1
 #define LEVEL_GROUND 0.2
 #define LEVEL_UNDERGROUND 0.3
+#define LEVEL_BACKGROUND 0.4
 
 
 class Renderer;
@@ -56,6 +57,8 @@ private:
 
 	Team		team;			// 팀종류
 
+	int			aniCount = 0;		// 애니메이션 카운트
+	float		particleTime = 0.0f;
 	Renderer*	renderer;		// 렌더러 포인터
 public:
 	Object();
@@ -98,7 +101,7 @@ public:
 	COLORS	GetColor()			{ return color; }
 	POS		GetDirection()		{ return direction; }
 
-	void	DrawObject(int texturesNum);
+	void	DrawObject(int texturesNum, float time);
 	void	DrawGauge();
 	void	MoveUpdate(float time);
 	void	Update(float time);
