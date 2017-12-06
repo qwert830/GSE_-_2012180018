@@ -157,26 +157,33 @@ void Object::DrawObject(int texturesNum, float time)
 
 void Object::DrawGauge()
 {
+	char buf[100];
+	sprintf_s(buf, "HP : %d", (int)life);
 	if (state == OBJECT_BUILDING)
 	{
 		if (team == Team::Team_1)
 		{
 			renderer->DrawSolidRectGauge(pos.x, pos.y + size/2 + 10, pos.z, size, 10, 1, 0, 0, 1, (float)(life / BUILDING_HP), 0);
+			renderer->DrawTextW(pos.x-16, pos.y + size / 2 + 6, GLUT_BITMAP_HELVETICA_10, 0, 1, 0, buf);
 		}
 		else if (team == Team::Team_2)
 		{
 			renderer->DrawSolidRectGauge(pos.x, pos.y + size/2 + 10, pos.z, size, 10, 0, 0, 1, 1, (float)(life / BUILDING_HP), 0);
+			renderer->DrawTextW(pos.x-16, pos.y + size / 2 + 6, GLUT_BITMAP_HELVETICA_10, 0, 1, 0, buf);
 		}
+		
 	}
 	else if (state == OBJECT_CHARACTER)
 	{
 		if (team == Team::Team_1)
 		{
 			renderer->DrawSolidRectGauge(pos.x, pos.y + size/2 + 10, pos.z, size, 10, 1, 0, 0, 1, (float)(life / CHARACTER_HP), 0);
+			renderer->DrawTextW(pos.x - 16, pos.y + size / 2 + 6, GLUT_BITMAP_HELVETICA_10, 0, 1, 0, buf);
 		}
 		else if (team == Team::Team_2)
 		{
 			renderer->DrawSolidRectGauge(pos.x, pos.y + size/2 + 10, pos.z, size, 10, 0, 0, 1, 1, (float)(life / CHARACTER_HP), 0);
+			renderer->DrawTextW(pos.x - 16, pos.y + size / 2 + 6, GLUT_BITMAP_HELVETICA_10, 0, 1, 0, buf);
 		}
 	}
 }

@@ -4,6 +4,8 @@
 
 void SceneManager::Init()
 {
+	m_sound = new Sound();
+
 	buildingTextures1 = pRenderer->CreatePngTexture("./Textures/Test.png");
 	buildingTextures2 = pRenderer->CreatePngTexture("./Textures/Test2.png");
 	backgroundTextures = pRenderer->CreatePngTexture("./Textures/background.png");
@@ -11,6 +13,10 @@ void SceneManager::Init()
 	characterTextures2 = pRenderer->CreatePngTexture("./Textures/character2.png");
 	bulletTextures1 = pRenderer->CreatePngTexture("./Textures/Bullet1.png");
 	bulletTextures2 = pRenderer->CreatePngTexture("./Textures/Bullet2.png");
+
+	soundBG = m_sound->CreateSound("./Dependencies/SoundSamples/MF-W-90.XM");
+	soundExplosion = m_sound->CreateSound("./Dependencies/SoundSamples/explosion.wav");
+	m_sound->PlaySound(soundBG, true, 0.2f);
 
 	NewBuilding(100, 75, Team::Team_1);
 	NewBuilding(250, 100, Team::Team_1);
@@ -77,6 +83,7 @@ void SceneManager::Update(float time)
 		}
 		timecount = 0;
 	}
+
 }
 
 void SceneManager::NewObject(int x, int y, COLORS colors, float size)
@@ -261,24 +268,28 @@ int SceneManager::CollisionEffect(int Obj1, int Obj2)
 		{
 			manager[Obj1]->SetLife(manager[Obj1]->GetLife() - manager[Obj2]->GetLife());
 			manager.erase(manager.begin() + Obj2);
+			m_sound->PlaySound(soundExplosion, false, 0.6f);
 			return (Obj2 - 1);
 		}
 		else if (manager[Obj1]->GetState() == OBJECT_BUILDING && manager[Obj2]->GetState() == OBJECT_BULLET)
 		{
 			manager[Obj1]->SetLife(manager[Obj1]->GetLife() - manager[Obj2]->GetLife());
 			manager.erase(manager.begin() + Obj2);
+			m_sound->PlaySound(soundExplosion, false, 0.4f);
 			return (Obj2 - 1);
 		}
 		else if (manager[Obj1]->GetState() == OBJECT_CHARACTER && manager[Obj2]->GetState() == OBJECT_BULLET)
 		{
 			manager[Obj1]->SetLife(manager[Obj1]->GetLife() - manager[Obj2]->GetLife());
 			manager.erase(manager.begin() + Obj2);
+			m_sound->PlaySound(soundExplosion, false, 0.2f);
 			return (Obj2 - 1);
 		}
 		else if (manager[Obj1]->GetState() == OBJECT_CHARACTER && manager[Obj2]->GetState() == OBJECT_ARROW)
 		{
 			manager[Obj1]->SetLife(manager[Obj1]->GetLife() - manager[Obj2]->GetLife());
 			manager.erase(manager.begin() + Obj2);
+			m_sound->PlaySound(soundExplosion, false, 0.3f);
 			return (Obj2 - 1);
 		}
 	}

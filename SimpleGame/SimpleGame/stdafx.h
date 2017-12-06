@@ -19,10 +19,10 @@
 #define ARROW_SIZE 4
 
 #include "targetver.h"
-
 #include <stdio.h>
 #include <tchar.h>
 #include <iostream>
+#include "Sound.h"
 
 using namespace std;
 

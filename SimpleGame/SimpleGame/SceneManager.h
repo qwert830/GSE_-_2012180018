@@ -26,6 +26,11 @@ private:
 	int characterTextures2 = 0;
 	int bulletTextures1 = 0;
 	int bulletTextures2 = 0;
+	
+	Sound* m_sound;
+	int soundBG;
+	int soundExplosion;
+
 public:
 	vector<Object*> manager;
 	void Init();
