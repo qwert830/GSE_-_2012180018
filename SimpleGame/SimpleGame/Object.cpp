@@ -145,7 +145,7 @@ void Object::DrawObject(int texturesNum, float time)
 	}
 	else if (state == OBJECT_BULLET)
 	{
-		renderer->DrawParticle(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a, -direction.x, -direction.y, texturesNum, particleTime);
+		renderer->DrawParticle(pos.x, pos.y, pos.z, size, color.r, color.g, color.b, color.a, -direction.x, -direction.y, texturesNum, particleTime,renderLevel);
 		particleTime += time;
 	}
 	else

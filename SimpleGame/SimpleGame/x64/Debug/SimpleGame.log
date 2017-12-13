@@ -1,7 +1,17 @@
-﻿  SceneManager.cpp
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(59): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(68): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  stdafx.cpp
+  Sound.cpp
+  SimpleGame.cpp
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\simplegame.cpp(97): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Renderer.cpp
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\renderer.cpp(257): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\renderer.cpp(258): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\renderer.cpp(558): warning C4267: '=': 'size_t'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\renderer.cpp(1118): warning C4244: '인수': 'float'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\renderer.cpp(1194): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  SceneManager.cpp
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(41): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(57): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(67): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(91): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(96): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(102): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -12,16 +22,33 @@ c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplega
 c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(116): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(117): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(123): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(130): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(132): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(133): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(138): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(144): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(131): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(136): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(139): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(144): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(146): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(147): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(153): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(158): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(158): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(314): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(150): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(150): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(152): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(153): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(159): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(164): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(164): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(165): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\scenemanager.cpp(326): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Object.cpp
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\object.cpp(27): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\object.cpp(148): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LoadPng.cpp
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(800): warning C4334: '<<': 32비트 시프트의 결과가 암시적으로 64비트로 변환됩니다. 64비트 시프트를 사용하시겠습니까?
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(1462): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(1466): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(1538): warning C4267: '=': 'size_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(3483): warning C4334: '<<': 32비트 시프트의 결과가 암시적으로 64비트로 변환됩니다. 64비트 시프트를 사용하시겠습니까?
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(3497): warning C4267: '인수': 'size_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(4338): warning C4267: '=': 'size_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(4386): warning C4267: '=': 'size_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(4466): warning C4267: '=': 'size_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\loadpng.cpp(5409): warning C4267: '초기화 중': 'size_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+c:\users\bmk\desktop\2017-2\gse\gse_project\gse_2_2012180018\simplegame\simplegame\object.h(27): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
   SimpleGame.vcxproj -> C:\Users\bmk\Desktop\2017-2\GSE\GSE_Project\GSE_2_2012180018\SimpleGame\x64\Debug\SimpleGame.exe

@@ -18,6 +18,7 @@ private:
 
 	float updateTime = 0.0f;
 	float createTime = 5.0f;
+	float cloudTime = 0.0f;
 
 	int buildingTextures1 = 0;
 	int buildingTextures2 = 0;
@@ -26,7 +27,11 @@ private:
 	int characterTextures2 = 0;
 	int bulletTextures1 = 0;
 	int bulletTextures2 = 0;
-	
+	int bulletTextures3 = 0;
+	int snowTextures = 0;
+
+	int debug = 0;
+
 	Sound* m_sound;
 	int soundBG;
 	int soundExplosion;

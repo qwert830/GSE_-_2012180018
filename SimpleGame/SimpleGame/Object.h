@@ -58,7 +58,8 @@ private:
 	Team		team;			// 팀종류
 
 	int			aniCount = 0;		// 애니메이션 카운트
-	float		particleTime = 0.0f;
+	double		particleTime = 0.0f;
+
 	Renderer*	renderer;		// 렌더러 포인터
 public:
 	Object();
